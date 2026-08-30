@@ -43,16 +43,19 @@ let carrito = [];
 
 
 function mostrarProductos() {
-    const contenedor = document.getElementById("productos-lista");
+    const contenedor = document.getElementById("producto-lista");
     contenedor.innerHTML = "";
     productos.forEach(producto => {
         contenedor.innerHTML+= `
       <div class="col-md-4 mb-4">
         <div class="card bg-dark text-light h-100">
-          <img src="${producto.imagen}" class="card-img-top" alt="${producto.nombre}">
+          <img src="${producto.imagen}" class="card-img-top" alt="${producto.nombre}" style="height:320px; object-fit: cover; witdh:100%">
           <div class="card-body">
             <h5 class="card-title">${producto.nombre}</h5>
             <p class="card-text">$${producto.precio}</p>
+            <a href="producto_e.html?id=${producto.id}" class="btn btn-danger">
+              Ver producto
+            </a>
             <button class="btn btn-danger" onclick="agregarAlCarrito(${producto.id})">
               Añadir al carrito
             </button>
