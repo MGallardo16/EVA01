@@ -122,26 +122,31 @@ main{
 }
 @media screen and (max-width: 850px){
     main{
+        /* Agrega un margen superior a la etiqueta principal para no pegar el contenido al techo */
         margin-top: 50px;
     }
     .behind-box{
+        /* Ajusta la caja traslucida de fondo para que sea más pequeña y sus elementos se ordenen en columna (uno sobre otro) */
         max-width: 350px;
         height: 300px;
         flex-direction: column;
         margin: auto;
     }
     .behind-box div{
+        /* Le quita los márgenes a los divs dentro de la caja trasera y los posiciona de forma absoluta */
         margin: 0px;
         position: absolute;
     }
 
 
     .container-login-registro{
+        /* Reajusta la posición de la caja blanca flotante (donde están los formularios) para centrarla en móviles */
         top: -10px;
         left: -5px;
         margin: auto;
     }
     .container-login-registro form{
+        /* Permite que los formularios se acomoden de forma relativa según su flujo natural dentro de la caja en pantallas pequeñas */
         position: relative;
     }
 }

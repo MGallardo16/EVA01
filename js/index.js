@@ -1,7 +1,8 @@
-//el let usuarioLogueado crea un boolean que indica si está logueado el usuario o no.
-// el false ayuda a que se queden deshabilitado los botones de añadir.
+// Se verifica si existe una sesión activa en la memoria del navegador (localStorage).
+// localStorage.getItem("usuarioLogueado") !== null evalúa si hay un usuario conectado.
+// Devuelve "true" si hay un usuario logueado, o "false" si no lo hay (deshabilitando los botones de añadir).
 
-let usuarioLogueado = false;
+let usuarioLogueado = localStorage.getItem("usuarioLogueado") !== null;
 
 
 //------------------------------------------------------
