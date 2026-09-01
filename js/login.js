@@ -102,6 +102,8 @@ formulario_registro.addEventListener("submit", function(e) {
     const correo = inputs[1].value;
     const contraseña = inputs[2].value;
 
+
+
     // find() busca en el array si ya existe un usuario creado con ese mismo correo.
     const existe = usuarios.find(u => u.correo === correo);
     if (existe) {
@@ -131,6 +133,29 @@ formulario_login.addEventListener("submit", function(e) {
     const inputs = formulario_login.querySelectorAll("input");
     const correo = inputs[0].value;
     const contraseña = inputs[1].value;
+
+    //--------------------------------------------------------------
+    // VALIDACIÓN DE ADMINISTRADOR
+    // Si el correo y contraseña coinciden con los del administrador, se le asigna el rol y redirige a la vista admin.
+    if (correo === "admin@correo.com" && contraseña === "admin123") {
+        
+        // Guarda en localStorage la sesión activa marcándolo como administrador.
+        localStorage.setItem("usuarioLogueado", JSON.stringify({
+            nombre_usuario: "Administrador",
+            correo: correo,
+            rol: "admin"
+        }));
+
+        alert("¡Bienvenido/a Administrador!");
+        
+        // Redirige al panel de administración.
+        window.location = "home_adm.html";
+        return; // Detiene la ejecución para no evaluar como usuario común.
+    }
+
+    //--------------------------------------------------------------
+    // VALIDACIÓN DE USUARIOS COMUNES
+    // Buscar en el array si coinciden el correo y la contraseña ingresados.
 
     // Buscar si coinciden correo y contraseña
     const usuarioValido = usuarios.find(u => u.correo === correo && u.contraseña === contraseña);
