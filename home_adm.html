@@ -10,24 +10,27 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
-    <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
-        <img src="img/Logo SIN PICARSE sin fondo.png" alt="Logo"
-           style="height:65px; width:auto; margin-right:15px;">
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="menu">
-      <ul class="navbar-nav ms-auto fs-5"> <!-- MS-AUTO sirve para mantener las opciones a la derecha, el FS-5 aumenta el tamaño de las letras.-->
-        <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
-        <li class="nav-item"><a class="nav-link" href="productos.html">Productos</a></li>
-        <li class="nav-item"><a class="nav-link" href="contacto.html">Contáctanos</a></li>
-        <li class="nav-item"><a class="nav-link" href="home_clt.html">Carrito</a></li>
-      </ul>
+  <div class="d-flex">
+    <div class="bg-secondary p-3 min-vh-100 d-flex flex-column justify-content-between" style="width: 260px;">
+      <div>
+        <h4 class="text-white mb-4 text-center border-bottom">Panel de Administrador</h4>
+
+        <div class="nav flex-column nav-pills">
+          <button class="nav-link text-white text-start text-center active" style="margin-bottom: 10px;" onclick="">Gestion de usuarios</button>
+          <button class="nav-link text-white text-start text-center active" style="margin-bottom: 10px;" onclick="">Gestion de productos</button>
+          <button class="nav-link text-white text-start text-center active" style="margin-bottom: 10px;" onclick="">Gestion de administradores</button>
+        </div>
+      </div>
+
+      <div>
+        <button class="btn btn-outline-danger w-100" onclick="cerrarSesion()">Cerrar Sesión</button>
+      </div>
     </div>
+
+
+
   </div>
-</nav>
+
+<script src="js/cerrarSesion.js"></script>
 </body>
 </html>

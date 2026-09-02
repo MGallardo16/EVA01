@@ -4,7 +4,6 @@
 
 let usuarioLogueado = localStorage.getItem("usuarioLogueado") !== null;
 
-
 //------------------------------------------------------
 
 //el const destacados agarra los primeros 4 productos de la lista productos en js.
