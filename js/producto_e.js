@@ -29,7 +29,7 @@ function mostrarProducto() {
       <h3 class="fw-bold">${producto.nombre}</h3>
       <p class="fs-4 text-danger">$${producto.precio}</p>
       <p class="text-muted"> ${producto.descripcion}</p>
-      <button class="btn btn-danger btn-lg" onclick="agregarAlCarrito(${producto.id})">
+      <button class="btn btn-danger btn-lg" onclick="agregarAlCarrito(${producto.id}); iluminarCarrito();">
         Añadir al carrito
       </button>
     </div>

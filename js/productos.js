@@ -215,7 +215,7 @@ function mostrarProductos() {
             <a href="producto_e.html?id=${producto.id}" class="btn btn-danger">
               Ver producto
             </a>
-            <button class="btn btn-danger" onclick="agregarAlCarrito(${producto.id})">
+            <button class="btn btn-danger" onclick="agregarAlCarrito(${producto.id}); iluminarCarrito();">
               Añadir al carrito
             </button>
           </div>
@@ -292,6 +292,8 @@ function eliminarDelCarrito(index) {
 
 //--------------------------------------------------------------
 //mostrarProductos() llama a la función al cargar la página para que los productos aparezcan de inmediato.
+
+
 
 
 mostrarProductos();
