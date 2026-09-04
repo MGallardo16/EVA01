@@ -1,13 +1,38 @@
 //--------------------------------------------------------------
-// BASE DE DATOS FICTICIA Y ESTADO DE SESIÓN
+// ESTADO DE SESIÓN
 // JSON.parse(localStorage.getItem("usuarios")) busca si ya existen usuarios guardados
 // en la memoria del navegador. Si no hay nada, inicia con un usuario de prueba predeterminado.
 
 let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [
   {
+    id: 1,
     nombre_usuario: "Usuario Prueba",
-    correo: "admin@correo.com",
+    correo: "usuarioPrueba@gmail.com",
     contraseña: "123"
+  },
+  {
+    id: 2,
+    nombre_usuario: "Camila Silva",
+    correo: "csilva@gmail.com",
+    contraseña: "passCamila123"
+  },
+  {
+    id: 3,
+    nombre_usuario: "Matías Rojas",
+    correo: "mrojas@duocuc.cl",
+    contraseña: "claveMati2026"
+  },
+  {
+    id: 4,
+    nombre_usuario: "Valentina Sepúlveda",
+    correo: "vsepulveda@gmail.com",
+    contraseña: "valenPassword456"
+  },
+  {
+    id: 5,
+    nombre_usuario: "Gonzalo Morales",
+    correo: "gmorales@yahoo.com",
+    contraseña: "gonzaPass789"
   }
 ];
 
@@ -111,8 +136,11 @@ formulario_registro.addEventListener("submit", function(e) {
         return;// Detiene la función para no crear duplicados
     }
 
+    // Busca el ID más alto existente y le suma 1 (si el array está vacío, empieza en 1)
+    const nuevoId = usuarios.length > 0 ? Math.max(...usuarios.map(u => u.id)) + 1 : 1;
+
     // push() agrega el nuevo objeto usuario con sus datos al array "usuarios".
-    usuarios.push({ nombre_usuario: nombre, correo: correo, contraseña: contraseña });
+    usuarios.push({ id:nuevoId, nombre_usuario: nombre, correo: correo, contraseña: contraseña });
 
     // localStorage.setItem guarda la lista actualizada en la memoria del navegador.
     // JSON.stringify convierte el array de JS a texto para poder guardarlo.
@@ -121,6 +149,7 @@ formulario_registro.addEventListener("submit", function(e) {
     alert("Usuario creado exitosamente");
     formulario_registro.reset(); // Limpia los campos de texto
     animacionIniciarSesion(); // Lo mueve al panel de login automáticamente
+
 });
 
 //--------------------------------------------------------------
@@ -134,35 +163,53 @@ formulario_login.addEventListener("submit", function(e) {
     const correo = inputs[0].value;
     const contraseña = inputs[1].value;
 
-    //--------------------------------------------------------------
-    // VALIDACIÓN DE ADMINISTRADOR
-    // Si el correo y contraseña coinciden con los del administrador, se le asigna el rol y redirige a la vista admin.
-    if (correo === "admin@correo.com" && contraseña === "admin123") {
-        
-        // Guarda en localStorage la sesión activa marcándolo como administrador.
+    // Lee los administradores de localStorage (o usa el admin por defecto)
+    let administradores = JSON.parse(localStorage.getItem("administradores")) || [
+        { id: 1, nombre_usuario: "SuperAdmin",
+            correo: "admin@correo.com",
+            contraseña: "admin123"
+        },
+        {
+            id: 2,
+            nombre_usuario: "adan_adm",
+            correo: "ad.ramirezn@duocuc.cl",
+            contraseña: "admin123"
+        },
+        {
+            id: 3,
+            nombre_usuario: "marcelo_adm",
+            correo: "marc.gallardos@duocuc.cl",
+            contraseña: "admin123"
+        }
+    ];
+
+    // Busca si el correo y la contraseña coinciden con algún admin guardado
+    const adminValido = administradores.find(a => a.correo === correo && a.contraseña === contraseña);
+
+    if (adminValido) {
+        // Guarda en localStorage la sesión activa con su rol 'admin'
         localStorage.setItem("usuarioLogueado", JSON.stringify({
-            nombre_usuario: "Administrador",
-            correo: correo,
+            id: adminValido.id,
+            nombre_usuario: adminValido.nombre_usuario,
+            correo: adminValido.correo,
             rol: "admin"
         }));
 
-        alert("¡Bienvenido/a Administrador!");
-        
-        // Redirige al panel de administración.
+        alert(`¡Bienvenido/a Administrador ${adminValido.nombre_usuario}!`);
         window.location = "home_adm.html";
-        return; // Detiene la ejecución para no evaluar como usuario común.
+        return; // Detiene la ejecución para no evaluar como usuario común
     }
 
-    //--------------------------------------------------------------
-    // VALIDACIÓN DE USUARIOS COMUNES
-    // Buscar en el array si coinciden el correo y la contraseña ingresados.
-
-    // Buscar si coinciden correo y contraseña
+    // Si no fue admin, busca en el arreglo de usuarios normales
     const usuarioValido = usuarios.find(u => u.correo === correo && u.contraseña === contraseña);
 
     if (usuarioValido) {
-        // Guarda los datos del usuario que inició sesión activa en localStorage.
-        localStorage.setItem("usuarioLogueado", JSON.stringify(usuarioValido));
+        // Guarda los datos del usuario cliente
+        localStorage.setItem("usuarioLogueado", JSON.stringify({
+            ...usuarioValido,
+            rol: "cliente"
+        }));
+
         alert(`¡Bienvenido/a ${usuarioValido.nombre_usuario}!`);
         window.location = "index.html"; // Redirige a la página principal
     } else {

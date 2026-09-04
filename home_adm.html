@@ -11,25 +11,30 @@
 </head>
 <body>
   <div class="d-flex">
-    <div class="bg-secondary p-3 min-vh-100 d-flex flex-column justify-content-between" style="width: 260px;">
+    <div class="sidebar">
       <div>
-        <h4 class="text-white mb-4 text-center border-bottom">Panel de Administrador</h4>
+        <h4>Panel de Administrador</h4>
 
         <div class="nav flex-column nav-pills">
-          <button class="nav-link text-white text-start text-center active" style="margin-bottom: 10px;" onclick="">Gestion de usuarios</button>
-          <button class="nav-link text-white text-start text-center active" style="margin-bottom: 10px;" onclick="">Gestion de productos</button>
-          <button class="nav-link text-white text-start text-center active" style="margin-bottom: 10px;" onclick="">Gestion de administradores</button>
+          <button class="text-start text-center" onclick="cargarTablaAdminUsers()">Gestion de usuarios</button>
+          <button class="text-start text-center" onclick="cargarTablaAdminProd()">Gestion de productos</button>
+          <button class="text-start text-center" onclick="cargarTablaAdministradores()">Gestion de administradores</button>
         </div>
       </div>
 
       <div>
-        <button class="btn btn-outline-danger w-100" onclick="cerrarSesion()">Cerrar Sesión</button>
+        <button class="btn-cerrarSesion" onclick="cerrarSesion()">Cerrar Sesión</button>
       </div>
     </div>
 
-
+    <main id="contenido-principal" class="flex-grow-1 p-4 w-100" style="max-height: 100vh; overflow: hidden;">
+      <p>Selecciona una opción del menú.</p>
+    </main>
 
   </div>
+
 <script src="js/cerrarSesion.js"></script>
+<script src="js/administracion.js"></script>
+<script src="js/productos.js"></script>
 </body>
 </html>

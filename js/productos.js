@@ -183,6 +183,11 @@ const productos =[
 
     ];
 
+// Si no existen productos en el localStorage, guardamos la lista "productos"
+if (!localStorage.getItem("productos")) {
+    localStorage.setItem("productos", JSON.stringify(productos));
+}
+
 
 //--------------------------------------------------------------
 //Se crea un array vacío que representa el carrito de compras.
