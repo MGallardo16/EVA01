@@ -31,11 +31,22 @@ let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [
   {
     id: 5,
     nombre_usuario: "Gonzalo Morales",
-    correo: "gmorales@yahoo.com",
+    correo: "gmorales@gmail.com",
     contraseña: "gonzaPass789"
   }
 ];
 
+//De esta forma simplemente damos una cantidad limitada de dominios para le ingreso a la página.
+function dominioValido(correo) {
+    return correo.ensWith("@gmail.com") 
+    || correo.endsWith("@duocuc.cl") 
+    || correo.endsWith("@profesor.duocuc.cl");
+}
+
+if (!dominioValido(correo)) {
+    alert("El correo debe ser de un dominio válido: @gmail.com, @duocuc.cl o @profesor.duocuc.cl");
+    return;
+}
 
 //--------------------------------------------------------------
 // EVENTOS DE ANIMACIÓN
