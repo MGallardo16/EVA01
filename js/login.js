@@ -180,6 +180,12 @@ formulario_login.addEventListener("submit", function(e) {
             nombre_usuario: "marcelo_adm",
             correo: "marc.gallardos@duocuc.cl",
             contraseña: "admin123"
+        },
+        {
+            id:4,
+            nombre_usuario: "user_adm_prueba_eliminar",
+            correo: "adminEliminar@gmail.com",
+            contraseña: "eliminarAdmin123"
         }
     ];
 
