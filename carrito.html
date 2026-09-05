@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap" rel="stylesheet">   
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>     
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
+        <img src="img/Logo SIN PICARSE sin fondo.png" alt="Logo"
+           style="height:65px; width:auto; margin-right:15px;">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="menu">
+      <ul class="navbar-nav ms-auto fs-5"> <!-- MS-AUTO sirve para mantener las opciones a la derecha, el FS-5 aumenta el tamaño de las letras.-->
+        <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="productos.html">Productos</a></li>
+        <li class="nav-item"><a class="nav-link" href="contacto.html">Contáctanos</a></li>
+        <li class="nav-item"><a class="nav-link" href="carrito.html">Carrito</a></li>
+      </ul>
+      <button id="btn-logout" class="btn btn-danger btn-lg d-none" style="margin-left: 20px;" onclick="cerrarSesion()">
+        Cerrar Sesión
+      </button>
+    </div>
+  </div>
+</nav>
+    <div class="container my-5">
+        <h1>Carrito de Compras</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Imagen</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="carrito-contenido"></tbody>
+            <tfoot id="carrito-totales"></tfoot>
+        </table>
+    </div>
+<footer class="bg-danger text-center py-3">
+    <p class="mb-0">SIN PICARSE © 2026 - Todos los derechos reservados</p>
+</footer>
+    <script src="js/carrito.js"></script>
+</body>
+</html>

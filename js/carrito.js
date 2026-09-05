@@ -1,42 +1,18 @@
-const listaProductos = document.querySelector('#listaProductos');
-let productosArray = [];
 
+//------------------------------------------------------
 
-document.addEventListener("DOMContentLoaded", function(){
-
-    this.addEventListener();
-
-});
-
-function eventListener(){
-    listaProductos.addEventListener('click', getDataElements);
-}
-
-function getDataElements(e){
-    if (e.target.classList.contains(btn-add)){
-        const elementHtml = e.target.parentElement.parentElement;
-        selectData(elementHtml);
-    }    
-}
-
-function selectData(producto){
-    const producto = {
-        nombre: productos.querySelector("nombre").src,
-        precio: productos.querySelector("precio").src,
-        imagen: productos.querySelector("imagen").src,
-        id: productos.querySelector("id"),
-        cantidad: 1
-    }
-
-    productosArray: [...productosArray, producto];
-    produtosHtml();
-}
+//Limpia el contenedor del carrito antes de dibujar los productos.
 
 function productosHtml(){
+    const contenedor = document.querySelector("#carrito-contenido");
+    const totales = document.querySelector("#carrito-totales");
+    contenedor.innerHTML = "";
+    totales.innerHTML = "";
 
-    productosArray.forEach(producto => {
+    let carrito= JSON.parse(localStorage.getItem("carrito")) || [];
+    //Aquí se recorre cada producto y crea una fila tr con sus datos.
+    carrito.forEach(producto => {
         const {imagen, nombre, precio, cantidad, id} = producto;
-
         const tr = document.createElement('tr');
 
         const tdImg = document.createElement('td');
@@ -45,36 +21,72 @@ function productosHtml(){
         tdImg.appendChild(producImg);
 
         const tdNombre = document.createElement('td');
-        const producNombre= document.createElement('nombre');
-        producNombre.src= nombre;
-        tdNombre.appendChild(producNombre);
+        tdNombre.textContent= nombre;
         
         
         const tdPrecio = document.createElement('td');
-        const producPrecio= document.createElement('precio');
-        producPrecio.src= precio;
-        tdPrecio.appendChild(producPrecio);
+        tdPrecio.textContent= `$${precio}`;
 
         const tdCant = document.createElement('td');
         const producCant= document.createElement('input');
-        producCant.type= 'number',
-        producCant.min = 1,
-        producCant.value= cantidad,
+        producCant.type= 'number';
+        producCant.min = 1;
+        producCant.value= cantidad;
         producCant.dataset.id= id;
+
+        producCant.addEventListener('change', (e) => {
+            const nuevaCantidad = parseInt(e.target.value);
+            const productoEditado = carrito.find(p => p.id === id);
+            if (productoEditado) {
+                productoEditado.cantidad = nuevaCantidad;
+                localStorage.setItem("carrito", JSON.stringify(carrito));
+                productosHtml();
+            }
+        });
+
         tdCant.appendChild(producCant);
         
+    
         const tdBorrar = document.createElement('td');
         const producBorrar = document.createElement('button');
         producBorrar.type= 'button';
-        producBorrar.textContent= 'x',
+        producBorrar.textContent= 'x';
+        producBorrar.addEventListener('click', () => {
+            let carrito= JSON.parse(localStorage.getItem("carrito")) || [];
+            carrito = carrito.filter(product => product.id !== id);
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+            productosHtml();
+        });
         tdBorrar.appendChild(producBorrar);
 
+tdBorrar.appendChild(producBorrar);
 
 
-        tr.appendChild(tdImg, tdNombre, tdPrecio, tdCant, tdBorrar);
 
-    })
+        tr.appendChild(tdImg);
+        tr.appendChild(tdNombre);
+        tr.appendChild(tdPrecio);
+        tr.appendChild(tdCant);
+        tr.appendChild(tdBorrar);
+
+        contenedor.appendChild(tr);
+
+    });
+
+    
+
+    
+    // Aquí se hacen los cálculos de subtotal, IVA y total, y se agregan al final de la tabla.
+    const subtotal = carrito.reduce((sum, product) => sum + product.precio * product.cantidad, 0);
+    const iva = subtotal * 0.19;
+    const total = subtotal + iva;
+
+    totales.innerHTML += `
+        <tr><td colspan="5">Subtotal: $${subtotal}</td></tr>
+        <tr><td colspan="5">IVA (19%): $${iva.toFixed(2)}</td></tr>
+        <tr><td colspan="5"><strong>Total: $${Math.round(total)}</strong></td></tr>
+    `;
 }
 
 
-//Se dejó hasta el contentProducts en el video. 
+document.addEventListener('DOMContentLoaded', productosHtml);

@@ -23,13 +23,13 @@ function mostrarProducto() {
     contenedor.innerHTML = `
     <div class="col-md-6">
       <img src="${producto.imagen}" alt="${producto.nombre}"
-           class="img-fluid rounded shadow" style="max-height:400px; object-fit:cover;">
+           class="imagen img-fluid rounded shadow" style="max-height:400px; object-fit:cover;">
     </div>
     <div class="col-md-6">
-      <h3 class="fw-bold">${producto.nombre}</h3>
-      <p class="fs-4 text-danger">$${producto.precio}</p>
-      <p class="text-muted"> ${producto.descripcion}</p>
-      <button class="btn btn-danger btn-lg" onclick="agregarAlCarrito(${producto.id}); iluminarCarrito();">
+      <h3 class="nombre fw-bold">${producto.nombre}</h3>
+      <p class="precio fs-4 text-danger">$${producto.precio}</p>
+      <p class="descripcion text-muted"> ${producto.descripcion}</p>
+      <button class="btn btn-danger btn-lg btn-add" onclick="agregarAlCarrito(${producto.id}); iluminarCarrito();">
         Añadir al carrito
       </button>
     </div>
